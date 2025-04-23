@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ChicPeek</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1>ChicPeek</h1>
+  <div class="description">
+    <p>Welcome to ChicPeek! Upload your photo and instantly see how different outfits look on you. 
+    Simply click the upload button to add your photo, then use the "Try Next Outfit" button to browse through various clothing options.</p>
+  </div>
+  <div class="controls">
+    <input type="file" id="upload" accept="image/*" />
+  </div>
+  <div id="canvas-container">
+    <img id="user-photo" src="" alt="Upload a photo to start" />
+    <img id="clothing-item" src="ei_1745400355327-removebg-preview.png" alt="Clothing Item" />
+  </div>
+  <div class="controls">
+    <button onclick="changeItem()">Try Next Outfit</button>
+  </div>
+
+  <script>
+    const upload = document.getElementById("upload");
+    const userPhoto = document.getElementById("user-photo");
+    const clothingItem = document.getElementById("clothing-item");
+
+    upload.addEventListener("change", function () {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        userPhoto.src = e.target.result;
+      };
+      reader.readAsDataURL(this.files[0]);
+    });
+
+    let items = [
+      "ei_1745400355327-removebg-preview.png",
+      "ei_1745401987148-removebg-preview.png",
+      "ei_1745401995862-removebg-preview.png",
+      "ei_1745402001769-removebg-preview.png",
+      "ei_1745402007703-removebg-preview.png"
+    ];
+    let index = 0;
+
+    function changeItem() {
+      index = (index + 1) % items.length;
+      clothingItem.src = items[index];
+    }
+  </script>
+</body>
+</html>
